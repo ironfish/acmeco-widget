@@ -1,0 +1,71 @@
+syntax = "proto3";
+package com.acmeco.widget;
+
+import "google/protobuf/timestamp.proto";
+
+// WidgetTeam message definition
+message WidgetTeam {
+  string id = 1;
+  string name = 2;
+  string activity_type = 3;
+  string program_id = 4; // NOTE protobuf doesn't support UUIDs. Use string in hexadecimal format.
+  google.protobuf.Timestamp modified = 5;
+  string user = 6;
+}
+
+// Request and Response message definitions for each RPC method
+
+// CreateWidgetTeam
+message CreateWidgetTeamRequest {
+  WidgetTeam widget_team = 1;
+}
+
+message CreateWidgetTeamResponse {
+  WidgetTeam widget_team = 1;
+}
+
+// ReadWidgetTeam
+message ReadWidgetTeamRequest {
+  string id = 1;
+}
+
+message ReadWidgetTeamResponse {
+  WidgetTeam widget_team = 1;
+}
+
+// ReadAllWidgetTeam
+message ReadAllWidgetTeamsRequest {
+  // string id = 1;
+}
+
+message ReadAllWidgetTeamsResponse {
+  repeated WidgetTeam widget_teams = 1;
+}
+
+// UpdateWidgetTeam
+message UpdateWidgetTeamRequest {
+  WidgetTeam widget_team = 1;
+}
+
+message UpdateWidgetTeamResponse {
+  WidgetTeam widget_team = 1;
+}
+
+// DeleteWidgetTeam
+message DeleteWidgetTeamRequest {
+  string id = 1;
+}
+
+message DeleteWidgetTeamResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+// WidgetTeamService definition with CRUD operations
+service WidgetTeamService {
+  rpc CreateWidgetTeam(CreateWidgetTeamRequest) returns (CreateWidgetTeamResponse);
+  rpc ReadWidgetTeam(ReadWidgetTeamRequest) returns (ReadWidgetTeamResponse);
+  rpc ReadAllWidgetTeams(ReadAllWidgetTeamsRequest) returns (ReadAllWidgetTeamsResponse);
+  rpc UpdateWidgetTeam(UpdateWidgetTeamRequest) returns (UpdateWidgetTeamResponse);
+  rpc DeleteWidgetTeam(DeleteWidgetTeamRequest) returns (DeleteWidgetTeamResponse);
+}
